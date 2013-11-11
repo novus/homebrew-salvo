@@ -9,5 +9,9 @@ class SalvoCli < Formula
   depends_on 'pbzip2'
 
   def install
+    system 'tar zxf data.tar.gz'
+    inreplace 'usr/bin/salvo', /^SALVO_JAR_DIR=.+/, "SALVO_JAR_DIR=#{share}"
+    bin.install 'usr/bin/salvo' => 'salvo'
+    share.install "usr/share/salvo/salvo-cli-#{version}.jar" => "salvo-cli-#{version}.jar"
   end
 end
